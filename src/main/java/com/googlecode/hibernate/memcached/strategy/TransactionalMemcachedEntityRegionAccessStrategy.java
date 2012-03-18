@@ -17,8 +17,9 @@ package com.googlecode.hibernate.memcached.strategy;
 import com.googlecode.hibernate.memcached.MemcachedCache;
 import com.googlecode.hibernate.memcached.region.MemcachedEntityRegion;
 import org.hibernate.cache.CacheException;
-import org.hibernate.cache.spi.EntityRegion;
-import org.hibernate.cache.spi.access.SoftLock;
+import org.hibernate.cache.EntityRegion;
+import org.hibernate.cache.access.SoftLock;
+
 import org.hibernate.cfg.Settings;
 
 /**

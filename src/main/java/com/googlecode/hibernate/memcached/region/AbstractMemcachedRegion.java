@@ -17,7 +17,7 @@ package com.googlecode.hibernate.memcached.region;
 import com.googlecode.hibernate.memcached.MemcachedCache;
 import java.util.Map;
 import org.hibernate.cache.CacheException;
-import org.hibernate.cache.spi.Region;
+import org.hibernate.cache.Region;
 
 /**
  *

@@ -22,16 +22,11 @@ import java.lang.reflect.Constructor;
 import java.util.Properties;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+
+import org.hibernate.cache.*;
+import org.hibernate.cache.access.AccessType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.hibernate.cache.CacheException;
-import org.hibernate.cache.spi.RegionFactory;
-import org.hibernate.cache.spi.CacheDataDescription;
-import org.hibernate.cache.spi.CollectionRegion;
-import org.hibernate.cache.spi.EntityRegion;
-import org.hibernate.cache.spi.QueryResultsRegion;
-import org.hibernate.cache.spi.TimestampsRegion;
-import org.hibernate.cache.spi.access.AccessType;
 import org.hibernate.cfg.Settings;
 
 
@@ -138,5 +133,9 @@ public class MemcachedRegionFactory implements RegionFactory {
     {
         return caches.get(regionName) == null
                 ? new MemcachedCache(regionName, client) : caches.get(regionName);
+    }
+
+    public Memcache getClient() {
+        return client;
     }
 }

@@ -20,7 +20,7 @@ import com.googlecode.hibernate.memcached.MemcachedCacheProvider;
 import java.util.Properties;
 
 import org.hibernate.cache.CacheException;
-import org.hibernate.cache.spi.TimestampsRegion;
+import org.hibernate.cache.TimestampsRegion;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 /**

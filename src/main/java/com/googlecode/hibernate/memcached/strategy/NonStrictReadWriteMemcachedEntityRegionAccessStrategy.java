@@ -16,7 +16,7 @@ package com.googlecode.hibernate.memcached.strategy;
 
 import com.googlecode.hibernate.memcached.region.MemcachedEntityRegion;
 import org.hibernate.cache.CacheException;
-import org.hibernate.cache.spi.access.SoftLock;
+import org.hibernate.cache.access.SoftLock;
 import org.hibernate.cfg.Settings;
 
 /**
@@ -49,18 +49,20 @@ public class NonStrictReadWriteMemcachedEntityRegionAccessStrategy extends Abstr
 
     public boolean afterInsert(Object key, Object value, Object version) throws CacheException
     {
-        region.getCache().put(key, value);
-        return true;
+//        region.getCache().put(key, value);
+        return false;
     }
 
     public boolean update(Object key, Object value, Object currentVersion, Object previousVersion) throws CacheException
     {
-        throw new UnsupportedOperationException("Can't write to a readonly object");
+        region.getCache().remove(key);
+        return false;
     }
 
     public boolean afterUpdate(Object key, Object value, Object currentVersion, Object previousVersion, SoftLock lock) throws CacheException
     {
-        throw new UnsupportedOperationException("Can't write to a readonly object");
+        unlockItem(key, lock);
+        return false;
     }
 
     public Object get(Object key, long txTimestamp) throws CacheException
@@ -70,12 +72,12 @@ public class NonStrictReadWriteMemcachedEntityRegionAccessStrategy extends Abstr
 
     public SoftLock lockItem(Object key, Object version) throws CacheException
     {
-        throw new UnsupportedOperationException("Can't write to a readonly object");
+        return null;
     }
 
     public void unlockItem(Object key, SoftLock lock) throws CacheException
     {
-        //throw new UnsupportedOperationException("Can't write to a readonly object");
+        region.getCache().remove(key);
     }
     
 }

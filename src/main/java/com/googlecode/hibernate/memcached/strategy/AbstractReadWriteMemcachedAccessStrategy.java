@@ -19,9 +19,11 @@ import java.io.Serializable;
 import java.util.Comparator;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicLong;
+
+import org.hibernate.cache.CacheDataDescription;
 import org.hibernate.cache.CacheException;
-import org.hibernate.cache.spi.CacheDataDescription;
-import org.hibernate.cache.spi.access.SoftLock;
+import org.hibernate.cache.access.SoftLock;
+import org.hibernate.cache.entry.CacheEntry;
 import org.hibernate.cfg.Settings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
