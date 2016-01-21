@@ -23,6 +23,7 @@ import com.googlecode.hibernate.memcached.strategy.TransactionalMemcachedCollect
 import java.util.Properties;
 
 import org.hibernate.cache.CacheException;
+import org.hibernate.cache.internal.CacheDataDescriptionImpl;
 import org.hibernate.cache.spi.CacheDataDescription;
 import org.hibernate.cache.spi.CollectionRegion;
 import org.hibernate.cache.spi.access.AccessType;
@@ -76,11 +77,10 @@ public class MemcachedCollectionRegion extends AbstractMemcachedRegion implement
 
     public boolean isTransactionAware()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return true;
     }
 
-    public CacheDataDescription getCacheDataDescription()
-    {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public CacheDataDescription getCacheDataDescription(){
+        return metadata;
     }
 }
