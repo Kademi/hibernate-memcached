@@ -1,3 +1,9 @@
+
+#FORKED
+  * Compiled against hibernate 4.2.8.Final
+  * Does not implement natural IDs
+----
+
 # Hibernate-memcached
 A library for using Memcached as a second level distributed cache in Hibernate.
 
@@ -34,7 +40,7 @@ Please note that this is an open source project. I work on it when I can and I i
   * [Sha1KeyStrategy][3] is now the default strategy.
   * [Md5KeyStrategy][4] and [Sha1KeyStrategy][3] both digest the entire combined key now (region, clear index, key)
   * [Md5KeyStrategy][4] and [Sha1KeyStrategy][3] have been re-implemented to hash both the toString() and hashCode() values
-    of the Hibernate query key object. This should eliminate collisions when using hashCode() alone. 
+    of the Hibernate query key object. This should eliminate collisions when using hashCode() alone.
     [Issue 22](http://code.google.com/p/hibernate-memcached/issues/detail?id=22).
   * [HashCodeKeyStrategy][1] [StringKeyStrategy][2] will throw exceptions now if the key length is greater than 250.
 
@@ -43,17 +49,17 @@ is due to the switch to Sha1KeyStrategy as the default. Hibernate-memcached will
 same data you were caching previously. Essentially, your cache will appear empty to Hibernate.
 
 Also, as a result of these changes, 1.3 may not be binary compatible with any subclass hacks you may have written that
-extend HashCodeKeyStrategy, StringKeyStrategy, Md5KeyStrategy, or Sha1KeyStrategy. Note that the KeyStrategy interface 
+extend HashCodeKeyStrategy, StringKeyStrategy, Md5KeyStrategy, or Sha1KeyStrategy. Note that the KeyStrategy interface
 and AbstractKeyStrategy have not changed at all. If you implemented/extended those directly you're fine.
 
   * Patch from @burtbeckwith to allow for memcached authentication via the spymemcached client.
     This can be specified using "hibernate.memcached.username" and "hibernate.memcached.password"
 
 ## 1.2.2
-  * Patch from ddlatham to allow the spymemcached library to be put 
-    into daemon mode. This is accomplished by setting 
-    hibernate.memcached.daemonMode to true. 
-  * Updated the maven pom to pull in spymemcached 2.4.2 by default. 
+  * Patch from ddlatham to allow the spymemcached library to be put
+    into daemon mode. This is accomplished by setting
+    hibernate.memcached.daemonMode to true.
+  * Updated the maven pom to pull in spymemcached 2.4.2 by default.
 
 # Note on Patches/Pull Requests
 
