@@ -8,6 +8,18 @@
     <url>http://code.google.com/p/hibernate-memcached/</url>
     <packaging>jar</packaging>
 
+    <distributionManagement>
+        <repository>
+            <id>kademi-private</id>
+            <url>http://repository.kademi.co/maven-private</url>
+        </repository>
+        <snapshotRepository>
+            <uniqueVersion>false</uniqueVersion>
+            <id>kademi-private</id>
+            <url>http://repository.kademi.co/maven-private</url>
+        </snapshotRepository>
+    </distributionManagement>
+
     <developers>
         <developer>
             <name>Ray Krueger</name>
@@ -35,9 +47,9 @@
             <url>http://download.java.net/maven/2/</url>
         </repository>
         <repository>
-          <id>couchbase</id>
-          <name>Spymemcached repository</name>
-          <url>http://files.couchbase.com/maven2/</url>
+            <id>couchbase</id>
+            <name>Spymemcached repository</name>
+            <url>http://files.couchbase.com/maven2/</url>
         </repository>
     </repositories>
 
@@ -47,22 +59,6 @@
         <url>http://github.com/raykrueger/hibernate-memcached/</url>
     </scm>
 
-    <distributionManagement>
-        <!-- use the following if you're not using a snapshot version. -->
-        <repository>
-            <uniqueVersion>false</uniqueVersion>
-            <id>googlecode</id>
-            <url>svn:https://raykrueger.googlecode.com/svn/repository</url>
-            <!--<url>file://distribution</url>-->
-        </repository>
-        <!-- use the following if you ARE using a snapshot version. -->
-        <snapshotRepository>
-            <uniqueVersion>false</uniqueVersion>
-            <id>googlecode</id>
-            <url>svn:https://raykrueger.googlecode.com/svn/repository</url>
-            <!--<url>file://distribution</url>-->
-        </snapshotRepository>
-    </distributionManagement>
     <build>
         <!--extensions>
             <extension>
@@ -86,20 +82,7 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.7</version>
-                <executions>
-                    <execution>
-                        <id>attach-javadoc</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -118,19 +101,7 @@
                     </descriptorRefs>
                 </configuration>
             </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>groovy-maven-plugin</artifactId>
-                <version>1.0-rc-5</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>generateTestStubs</goal>
-                            <goal>testCompile</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-scm-plugin</artifactId>
@@ -180,7 +151,7 @@
             <artifactId>slf4j-api</artifactId>
             <version>1.5.6</version>
         </dependency>
-        
+
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
@@ -199,7 +170,7 @@
             <version>3.3.1.GA</version>
             <scope>test</scope>
         </dependency-->
-        
+
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
