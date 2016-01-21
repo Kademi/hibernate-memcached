@@ -16,7 +16,7 @@ package com.googlecode.hibernate.memcached.strategy;
 
 import com.googlecode.hibernate.memcached.region.MemcachedEntityRegion;
 import org.hibernate.cache.CacheException;
-import org.hibernate.cache.access.SoftLock;
+import org.hibernate.cache.spi.access.SoftLock;
 import org.hibernate.cfg.Settings;
 
 /**
@@ -37,7 +37,7 @@ public class ReadOnlyMemcachedEntityRegionAccessStrategy extends AbstractEntityR
     public Object get(Object key, long txTimestamp) throws CacheException {
         return region.getCache().get(key);
     }
- 
+
     /**
      * {@inheritDoc}
      */
@@ -50,7 +50,7 @@ public class ReadOnlyMemcachedEntityRegionAccessStrategy extends AbstractEntityR
             return true;
         }
     }
- 
+
     /**
      * Throws UnsupportedOperationException since this cache is read-only
      *
@@ -59,21 +59,21 @@ public class ReadOnlyMemcachedEntityRegionAccessStrategy extends AbstractEntityR
     public SoftLock lockItem(Object key, Object version) throws UnsupportedOperationException {
         throw new UnsupportedOperationException("Can't write to a readonly object");
     }
- 
+
     /**
      * A no-op since this cache is read-only
      */
     public void unlockItem(Object key, SoftLock lock) throws CacheException {
         //throw new UnsupportedOperationException("Can't write to a readonly object");
     }
- 
+
     /**
      * This cache is asynchronous hence a no-op
      */
     public boolean insert(Object key, Object value, Object version) throws CacheException {
         return false;
     }
- 
+
     /**
      * {@inheritDoc}
      */
@@ -81,7 +81,7 @@ public class ReadOnlyMemcachedEntityRegionAccessStrategy extends AbstractEntityR
         region.getCache().put(key, value);
         return true;
     }
- 
+
     /**
      * Throws UnsupportedOperationException since this cache is read-only
      *
@@ -90,7 +90,7 @@ public class ReadOnlyMemcachedEntityRegionAccessStrategy extends AbstractEntityR
     public boolean update(Object key, Object value, Object currentVersion, Object previousVersion) throws UnsupportedOperationException {
         throw new UnsupportedOperationException("Can't write to a readonly object");
     }
- 
+
     /**
      * Throws UnsupportedOperationException since this cache is read-only
      *
@@ -100,5 +100,5 @@ public class ReadOnlyMemcachedEntityRegionAccessStrategy extends AbstractEntityR
             throws UnsupportedOperationException {
         throw new UnsupportedOperationException("Can't write to a readonly object");
     }
-    
+
 }

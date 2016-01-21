@@ -15,19 +15,18 @@
 package com.googlecode.hibernate.memcached.strategy;
 
 import com.googlecode.hibernate.memcached.region.MemcachedEntityRegion;
-import com.googlecode.hibernate.memcached.strategy.AbstractMemcachedAccessStrategy;
-import org.hibernate.cache.EntityRegion;
-import org.hibernate.cache.access.EntityRegionAccessStrategy;
+import org.hibernate.cache.spi.EntityRegion;
+import org.hibernate.cache.spi.access.EntityRegionAccessStrategy;
 import org.hibernate.cfg.Settings;
 
 /**
  *
  * @author kcarlson
  */
-abstract class AbstractEntityRegionAccessStrategy 
+abstract class AbstractEntityRegionAccessStrategy
                     extends AbstractMemcachedAccessStrategy<MemcachedEntityRegion> implements EntityRegionAccessStrategy
 {
-    
+
     protected AbstractEntityRegionAccessStrategy(MemcachedEntityRegion entityRegion, Settings settings)
     {
         super(entityRegion, settings);

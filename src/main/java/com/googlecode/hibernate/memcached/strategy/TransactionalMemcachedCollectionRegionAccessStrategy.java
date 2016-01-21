@@ -17,7 +17,7 @@ package com.googlecode.hibernate.memcached.strategy;
 import com.googlecode.hibernate.memcached.MemcachedCache;
 import com.googlecode.hibernate.memcached.region.MemcachedCollectionRegion;
 import org.hibernate.cache.CacheException;
-import org.hibernate.cache.access.SoftLock;
+import org.hibernate.cache.spi.access.SoftLock;
 import org.hibernate.cfg.Settings;
 
 /**
@@ -52,5 +52,5 @@ public class TransactionalMemcachedCollectionRegionAccessStrategy extends Abstra
 
     public void unlockItem(Object key, SoftLock lock) throws CacheException {
     }
-    
+
 }

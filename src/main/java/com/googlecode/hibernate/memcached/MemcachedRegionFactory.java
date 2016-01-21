@@ -24,7 +24,13 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
 import org.hibernate.cache.*;
-import org.hibernate.cache.access.AccessType;
+import org.hibernate.cache.spi.CacheDataDescription;
+import org.hibernate.cache.spi.CollectionRegion;
+import org.hibernate.cache.spi.EntityRegion;
+import org.hibernate.cache.spi.NaturalIdRegion;
+import org.hibernate.cache.spi.QueryResultsRegion;
+import org.hibernate.cache.spi.TimestampsRegion;
+import org.hibernate.cache.spi.access.AccessType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.hibernate.cfg.Settings;
@@ -34,23 +40,23 @@ import org.hibernate.cfg.Settings;
  *
  * @author kcarlson
  */
-public class MemcachedRegionFactory implements RegionFactory {
+public class MemcachedRegionFactory implements org.hibernate.cache.spi.RegionFactory {
 
     private final Logger log = LoggerFactory.getLogger(MemcachedCacheProvider.class);
-    
+
     private final ConcurrentMap<String, MemcachedCache> caches = new ConcurrentHashMap<String, MemcachedCache>();
-    
+
     private Properties properties;
     private Memcache client;
     private Settings settings;
-    
+
     public MemcachedRegionFactory(Properties properties) {
         this.properties = properties;
     }
-    
+
     public MemcachedRegionFactory() {
     }
-    
+
     public void start(Settings settings, Properties properties) throws CacheException {
         this.settings = settings;
         this.properties = properties;
@@ -102,7 +108,11 @@ public class MemcachedRegionFactory implements RegionFactory {
         return new MemcachedTimestampsRegion(getCache(regionName),
                 properties, client);
     }
-    
+
+    public NaturalIdRegion buildNaturalIdRegion(String regionName, Properties properties, CacheDataDescription metadata) throws CacheException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     protected MemcacheClientFactory getMemcachedClientFactory(Config config) {
         String factoryClassName = config.getMemcachedClientFactoryName();
 
@@ -128,7 +138,7 @@ public class MemcachedRegionFactory implements RegionFactory {
 
         return clientFactory;
     }
-    
+
     private MemcachedCache getCache(String regionName)
     {
         return caches.get(regionName) == null
@@ -138,4 +148,6 @@ public class MemcachedRegionFactory implements RegionFactory {
     public Memcache getClient() {
         return client;
     }
+
+
 }

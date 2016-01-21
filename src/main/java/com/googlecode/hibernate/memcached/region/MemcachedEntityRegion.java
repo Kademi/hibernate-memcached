@@ -24,11 +24,11 @@ import com.googlecode.hibernate.memcached.strategy.ReadWriteMemcachedEntityRegio
 import com.googlecode.hibernate.memcached.strategy.TransactionalMemcachedEntityRegionAccessStrategy;
 import java.util.Properties;
 
-import org.hibernate.cache.CacheDataDescription;
 import org.hibernate.cache.CacheException;
-import org.hibernate.cache.EntityRegion;
-import org.hibernate.cache.access.AccessType;
-import org.hibernate.cache.access.EntityRegionAccessStrategy;
+import org.hibernate.cache.spi.CacheDataDescription;
+import org.hibernate.cache.spi.EntityRegion;
+import org.hibernate.cache.spi.access.AccessType;
+import org.hibernate.cache.spi.access.EntityRegionAccessStrategy;
 import org.hibernate.cfg.Settings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,12 +37,12 @@ import org.slf4j.LoggerFactory;
  * @author kcarlson
  */
 public class MemcachedEntityRegion extends AbstractMemcachedRegion implements EntityRegion {
-    
+
     private final Logger log = LoggerFactory.getLogger(MemcachedCacheProvider.class);
 
     private final CacheDataDescription metadata;
     private final Settings settings;
-    
+
     public MemcachedEntityRegion(MemcachedCache cache, Settings settings, CacheDataDescription metadata, Properties properties, Memcache client) {
         super(cache);
         this.metadata = metadata;
@@ -50,17 +50,15 @@ public class MemcachedEntityRegion extends AbstractMemcachedRegion implements En
     }
 
     public EntityRegionAccessStrategy buildAccessStrategy(AccessType accessType) throws CacheException {
-        
+
         if (AccessType.READ_ONLY.equals(accessType)) {
             if (metadata.isMutable()) {
                 log.warn("read-only cache configured for mutable entity ["
                                 + getName() + "]");
             }
-            return new ReadOnlyMemcachedEntityRegionAccessStrategy(this ,
-                    settings);
+            return new ReadOnlyMemcachedEntityRegionAccessStrategy(this ,settings);
         } else if (AccessType.READ_WRITE.equals(accessType)) {
-            return new ReadWriteMemcachedEntityRegionAccessStrategy(this ,
-                    settings);
+            return new ReadWriteMemcachedEntityRegionAccessStrategy(this ,settings);
         } else if (AccessType.NONSTRICT_READ_WRITE.equals(accessType)) {
             return new NonStrictReadWriteMemcachedEntityRegionAccessStrategy(
                     this , settings);

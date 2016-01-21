@@ -17,8 +17,8 @@ package com.googlecode.hibernate.memcached.strategy;
 import com.googlecode.hibernate.memcached.MemcachedCache;
 import com.googlecode.hibernate.memcached.region.MemcachedEntityRegion;
 import org.hibernate.cache.CacheException;
-import org.hibernate.cache.EntityRegion;
-import org.hibernate.cache.access.SoftLock;
+import org.hibernate.cache.spi.EntityRegion;
+import org.hibernate.cache.spi.access.SoftLock;
 
 import org.hibernate.cfg.Settings;
 
@@ -35,28 +35,28 @@ public class TransactionalMemcachedEntityRegionAccessStrategy extends AbstractEn
         super(aThis, settings);
         this.cache = cache;
     }
-    
+
     /**
      * {@inheritDoc}
      */
     public boolean afterInsert(Object key, Object value, Object version) {
         return false;
     }
- 
+
     /**
      * {@inheritDoc}
      */
     public boolean afterUpdate(Object key, Object value, Object currentVersion, Object previousVersion, SoftLock lock) {
         return false;
     }
- 
+
     /**
      * {@inheritDoc}
      */
     public Object get(Object key, long txTimestamp) throws CacheException {
         return cache.get(key);
     }
- 
+
     /**
      * {@inheritDoc}
      */
@@ -64,7 +64,7 @@ public class TransactionalMemcachedEntityRegionAccessStrategy extends AbstractEn
     public EntityRegion getRegion() {
         return region;
     }
- 
+
     /**
      * {@inheritDoc}
      */
@@ -74,14 +74,14 @@ public class TransactionalMemcachedEntityRegionAccessStrategy extends AbstractEn
         cache.put(key, value);
         return true;
     }
- 
+
     /**
      * {@inheritDoc}
      */
     public SoftLock lockItem(Object key, Object version) throws CacheException {
         return null;
     }
- 
+
     /**
      * {@inheritDoc}
      */
@@ -94,7 +94,7 @@ public class TransactionalMemcachedEntityRegionAccessStrategy extends AbstractEn
         cache.put(key, value);
         return true;
     }
- 
+
     /**
      * {@inheritDoc}
      */
@@ -102,14 +102,14 @@ public class TransactionalMemcachedEntityRegionAccessStrategy extends AbstractEn
     public void remove(Object key) throws CacheException {
         cache.remove(key);
     }
- 
+
     /**
      * {@inheritDoc}
      */
     public void unlockItem(Object key, SoftLock lock) throws CacheException {
         // no-op
     }
- 
+
     /**
      * {@inheritDoc}
      */

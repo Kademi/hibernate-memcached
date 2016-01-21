@@ -16,7 +16,7 @@ package com.googlecode.hibernate.memcached.strategy;
 
 import com.googlecode.hibernate.memcached.region.AbstractMemcachedRegion;
 import org.hibernate.cache.CacheException;
-import org.hibernate.cache.access.SoftLock;
+import org.hibernate.cache.spi.access.SoftLock;
 import org.hibernate.cfg.Settings;
 
 /**
@@ -27,7 +27,7 @@ public abstract class AbstractMemcachedAccessStrategy<T extends AbstractMemcache
 {
     protected T region;
     private Settings settings;
-    
+
     public AbstractMemcachedAccessStrategy(T region, Settings settings) {
         this.region = region;
         this.settings = settings;
@@ -54,7 +54,7 @@ public abstract class AbstractMemcachedAccessStrategy<T extends AbstractMemcache
 
     public void remove(Object key) throws CacheException
     {
-        
+
     }
 
     public void removeAll() throws CacheException
@@ -71,5 +71,5 @@ public abstract class AbstractMemcachedAccessStrategy<T extends AbstractMemcache
     {
         region.getCache().clear();
     }
-    
+
 }

@@ -19,7 +19,7 @@ import com.googlecode.hibernate.memcached.MemcachedCache;
 import com.googlecode.hibernate.memcached.MemcachedCacheProvider;
 import java.util.Properties;
 import org.hibernate.cache.CacheException;
-import org.hibernate.cache.QueryResultsRegion;
+import org.hibernate.cache.spi.QueryResultsRegion;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,7 +28,7 @@ import org.slf4j.LoggerFactory;
  * @author kcarlson
  */
 public class MemcachedQueryResultsRegion extends AbstractMemcachedRegion implements QueryResultsRegion {
-    
+
     private final Logger log = LoggerFactory.getLogger(MemcachedCacheProvider.class);
 
     public MemcachedQueryResultsRegion(MemcachedCache cache, Properties properties, Memcache client) {

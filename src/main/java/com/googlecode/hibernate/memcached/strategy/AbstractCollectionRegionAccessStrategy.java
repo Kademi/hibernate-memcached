@@ -15,9 +15,8 @@
 package com.googlecode.hibernate.memcached.strategy;
 
 import com.googlecode.hibernate.memcached.region.MemcachedCollectionRegion;
-import com.googlecode.hibernate.memcached.strategy.AbstractMemcachedAccessStrategy;
-import org.hibernate.cache.CollectionRegion;
-import org.hibernate.cache.access.CollectionRegionAccessStrategy;
+import org.hibernate.cache.spi.CollectionRegion;
+import org.hibernate.cache.spi.access.CollectionRegionAccessStrategy;
 import org.hibernate.cfg.Settings;
 
 /**
@@ -27,7 +26,7 @@ import org.hibernate.cfg.Settings;
 abstract class AbstractCollectionRegionAccessStrategy
                     extends AbstractMemcachedAccessStrategy<MemcachedCollectionRegion> implements CollectionRegionAccessStrategy
 {
-    
+
     protected AbstractCollectionRegionAccessStrategy(MemcachedCollectionRegion collectionRegion, Settings settings)
     {
         super(collectionRegion, settings);
@@ -37,5 +36,5 @@ abstract class AbstractCollectionRegionAccessStrategy
     {
         return region;
     }
-    
+
 }

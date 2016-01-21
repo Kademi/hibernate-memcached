@@ -16,18 +16,17 @@ package com.googlecode.hibernate.memcached.strategy;
 
 import com.googlecode.hibernate.memcached.region.AbstractMemcachedRegion;
 import com.googlecode.hibernate.memcached.region.MemcachedEntityRegion;
-import com.googlecode.hibernate.memcached.strategy.AbstractReadWriteMemcachedAccessStrategy;
 import org.hibernate.cache.CacheException;
-import org.hibernate.cache.EntityRegion;
-import org.hibernate.cache.access.EntityRegionAccessStrategy;
-import org.hibernate.cache.access.SoftLock;
+import org.hibernate.cache.spi.EntityRegion;
+import org.hibernate.cache.spi.access.EntityRegionAccessStrategy;
+import org.hibernate.cache.spi.access.SoftLock;
 import org.hibernate.cfg.Settings;
 
 /**
  *
  * @author kcarlson
  */
-public class ReadWriteMemcachedEntityRegionAccessStrategy 
+public class ReadWriteMemcachedEntityRegionAccessStrategy
         extends AbstractReadWriteMemcachedAccessStrategy<AbstractMemcachedRegion> implements EntityRegionAccessStrategy
 {
 
